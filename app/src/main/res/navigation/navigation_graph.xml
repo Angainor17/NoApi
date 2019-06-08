@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/navigation_graph"
+            app:startDestination="@id/peersFragment">
+
+    <fragment
+            android:id="@+id/peersFragment"
+
+            android:name="com.voronin.noapi.peersScreen.PeersFragment"
+            android:label="PeersBaseFragment"
+
+            tools:layout="@layout/peers_fragment_layout">
+
+        <action
+                android:id="@+id/action_peersFragment_to_chatFragment"
+
+                app:launchSingleTop="true"
+                app:destination="@id/chatFragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"
+                app:popEnterAnim="@anim/slide_in_left"
+                app:popExitAnim="@anim/slide_out_right"
+                app:popUpTo="@+id/peersFragment">
+
+        </action>
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/chatFragment"
+
+            android:name="com.voronin.noapi.chat.ChatFragment"
+            android:label="ChatFragment"
+
+            tools:layout="@layout/chat_fragment_layout">
+
+    </fragment>
+
+</navigation>
