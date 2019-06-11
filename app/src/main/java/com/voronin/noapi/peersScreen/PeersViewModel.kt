@@ -6,6 +6,8 @@ import android.net.wifi.p2p.WifiP2pManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.voronin.noapi.peersScreen.models.PeerItem
+import com.voronin.noapi.wifiP2P.WifiP2PHandler
 import com.voronin.noapi.wifiP2P.WifiP2PManager
 
 
@@ -26,6 +28,10 @@ class PeersViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private val wifiP2PManager = WifiP2PManager(application, peerListListener)
+
+    init {
+        WifiP2PHandler.wifiP2pManager = wifiP2PManager
+    }
 
     fun getPeers(): LiveData<ArrayList<PeerItem>> = peers
 

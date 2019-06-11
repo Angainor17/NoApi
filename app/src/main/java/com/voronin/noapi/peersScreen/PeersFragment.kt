@@ -1,7 +1,5 @@
 package com.voronin.noapi.peersScreen
 
-import android.content.IntentFilter
-import android.net.wifi.p2p.WifiP2pManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,13 +13,13 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.voronin.noapi.R
+import com.voronin.noapi.peersScreen.models.PeerItem
 import kotlinx.android.synthetic.main.peers_fragment_layout.*
 
 class PeersFragment : Fragment() {
 
     private lateinit var viewModel: PeersViewModel
 
-    private val intentFilter = IntentFilter()
     private val peerListAdapter = PeerListAdapter(this::openChat)
 
     private lateinit var navController: NavController
@@ -32,8 +30,6 @@ class PeersFragment : Fragment() {
         viewModel.getPeers().observe(this, Observer {
             peerListAdapter.list = it
         })
-
-        initIntentFilter()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
@@ -43,16 +39,6 @@ class PeersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         navController = Navigation.findNavController(view)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        activity?.registerReceiver(viewModel.getReceiver(), intentFilter)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        activity?.unregisterReceiver(viewModel.getReceiver())
     }
 
     private fun initViews() {
@@ -71,10 +57,5 @@ class PeersFragment : Fragment() {
         navController.navigate(R.id.action_peersFragment_to_chatFragment, bundleOf("peerItem" to peerItem))
     }
 
-    private fun initIntentFilter() {
-        intentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION)
-        intentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION)
-        intentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION)
-        intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION)
-    }
+
 }

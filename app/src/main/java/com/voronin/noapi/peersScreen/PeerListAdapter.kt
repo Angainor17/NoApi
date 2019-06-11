@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.voronin.noapi.R
+import com.voronin.noapi.peersScreen.models.PeerItem
 
 class PeerListAdapter(private val clickListener: (PeerItem) -> Unit) :
     RecyclerView.Adapter<PeerListAdapter.ViewHolder>() {
