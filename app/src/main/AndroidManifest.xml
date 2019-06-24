@@ -11,6 +11,9 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <uses-feature android:name="android.hardware.wifi.direct" android:required="true"/>
 
     <application
@@ -21,7 +24,7 @@
             android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-                android:name=".MainActivity"
+                android:name=".newWifi.WiFiServiceDiscoveryActivity"
                 android:launchMode="singleTop">
 
             <intent-filter>

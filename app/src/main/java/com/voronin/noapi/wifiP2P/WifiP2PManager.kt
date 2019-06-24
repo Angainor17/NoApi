@@ -23,7 +23,7 @@ import java.net.Socket
 class WifiP2PManager(application: Application, val peerListListener: WifiP2pManager.PeerListListener) {
 
     companion object {
-        private const val SERVER_PORT = "8888"
+        private const val SERVER_PORT = "8080"
     }
 
     val receiver: BroadcastReceiver
@@ -179,6 +179,7 @@ class WifiP2PManager(application: Application, val peerListListener: WifiP2pMana
             while (socket != null) {
                 try {
                     bytes = inputStream.read(buffer)
+                    debug("SendReceive ")
                     if (bytes > 0) {
                         handler?.obtainMessage(MESSAGE_READ, bytes, -1, buffer)?.sendToTarget()
                     }
@@ -205,7 +206,7 @@ class WifiP2PManager(application: Application, val peerListListener: WifiP2pMana
         override fun run() {
             super.run()
             try {
-                socket.connect(InetSocketAddress(hostAdd, 8888), 10500)
+                socket.connect(InetSocketAddress(hostAdd, 8080), 100500)
                 sendReceive = SendReceive(socket)
                 sendReceive!!.start()
             } catch (e: Exception) {
@@ -220,7 +221,7 @@ class WifiP2PManager(application: Application, val peerListListener: WifiP2pMana
 
         override fun run() {
             try {
-                serverSocket = ServerSocket(8888)
+                serverSocket = ServerSocket(8080)
                 socket = serverSocket.accept()
                 sendReceive = SendReceive(socket)
                 sendReceive!!.start()
