@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,14 +12,11 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.voronin.noapi.R
-import com.voronin.noapi.peersScreen.models.PeerItem
 import kotlinx.android.synthetic.main.peers_fragment_layout.*
 
 class PeersFragment : Fragment() {
 
     private lateinit var viewModel: PeersViewModel
-
-    private val peerListAdapter = PeerListAdapter(this::openChat)
 
     private lateinit var navController: NavController
 
@@ -28,7 +24,7 @@ class PeersFragment : Fragment() {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(PeersViewModel::class.java)
         viewModel.getPeers().observe(this, Observer {
-            peerListAdapter.list = it
+
         })
     }
 
@@ -42,20 +38,11 @@ class PeersFragment : Fragment() {
     }
 
     private fun initViews() {
-        viewModel.initP2P()
-
         peersList.layoutManager = LinearLayoutManager(context)
         peersList.itemAnimator = DefaultItemAnimator()
-        peersList.adapter = peerListAdapter
 
         discoverPeersBtn.setOnClickListener {
-            viewModel.discoverPeers()
+
         }
     }
-
-    private fun openChat(peerItem: PeerItem) {
-        navController.navigate(R.id.action_peersFragment_to_chatFragment, bundleOf("peerItem" to peerItem))
-    }
-
-
 }
