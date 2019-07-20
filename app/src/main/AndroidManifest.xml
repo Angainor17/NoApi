@@ -24,7 +24,7 @@
             android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-                android:name=".newWifi.WiFiServiceDiscoveryActivity"
+                android:name=".MainActivity"
                 android:launchMode="singleTop">
 
             <intent-filter>

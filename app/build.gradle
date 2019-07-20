@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
+apply plugin: 'kotlin-kapt'
+
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -23,29 +25,30 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation kotlinCore.core
+//    implementation picasso.core
+    implementation kodein.core
+    implementation gson.core
 
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation retrofit.core
+    implementation retrofit.gsonConverter
+    implementation retrofit.coroutinesAdapter
 
-    implementation 'android.arch.navigation:navigation-fragment:1.0.0'
-    implementation 'android.arch.navigation:navigation-ui:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation androidx.appcompat
+    implementation androidx.coreKtx
+    implementation androidx.constraintlayout
+    implementation androidx.lifecycle
+    implementation androidx.liveData
+    implementation androidx.navigationFragment
+    implementation androidx.navigationUI
+//    implementation androidx.paging
 
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation test.junit
+    androidTestImplementation test.testRunner
+    androidTestImplementation test.espresso
 
-
-    annotationProcessor 'org.projectlombok:lombok:1.16.8'
-    compileOnly 'org.projectlombok:lombok:1.16.8'
-
-    implementation 'com.android.support:recyclerview-v7:28.0.2'
-
-    implementation 'com.jpardogo.materialtabstrip:library:1.0.6'
-
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    testImplementation test.rule
+    testImplementation test.mockitoApi
+    testImplementation test.robolectric
+    testImplementation test.classloadingXstream
 }

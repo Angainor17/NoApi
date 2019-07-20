@@ -4,6 +4,6 @@ import android.util.Log
 
 const val DEBUG_TAG = "noApi"
 
-fun debug(text: String){
+fun debug(text: String) {
     Log.w(DEBUG_TAG, text)
 }
