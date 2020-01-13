@@ -72,10 +72,10 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
+        maven { url "http://tomp2p.net/dev/mvn" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.2'
+        classpath 'com.android.tools.build:gradle:3.5.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
     }
 }

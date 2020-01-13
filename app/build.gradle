@@ -15,6 +15,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -22,17 +24,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+
+    dynamicFeatures = [":sdk"]
+
+
 }
 
 dependencies {
     implementation kotlinCore.core
-//    implementation picasso.core
+
     implementation kodein.core
     implementation gson.core
 
-    implementation retrofit.core
-    implementation retrofit.gsonConverter
-    implementation retrofit.coroutinesAdapter
+    implementation 'org.nanohttpd:nanohttpd:2.3.1'
 
     implementation androidx.appcompat
     implementation androidx.coreKtx
@@ -41,7 +46,6 @@ dependencies {
     implementation androidx.liveData
     implementation androidx.navigationFragment
     implementation androidx.navigationUI
-//    implementation androidx.paging
 
     testImplementation test.junit
     androidTestImplementation test.testRunner
