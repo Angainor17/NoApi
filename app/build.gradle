@@ -6,6 +6,9 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+def GNUTLS_PATH = "C:\\Users\\angai\\AndroidStudioProjects\\NoApi\\gnutls\\bin"
+def CMAKE_PATH = "C:\\Users\\angai\\AndroidStudioProjects\\NoApi\\app\\src\\main\\cpp\\opendht\\CMakeLists.txt"
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -19,7 +22,15 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true
+
+        externalNativeBuild {
+            cmake {
+                arguments "-GNUTLS_INCLUDE_DIR=${GNUTLS_PATH}", "-DCMAKE_INSTALL_PREFIX=/usr", '-DOPENDHT_PYTHON=OFF'
+                cppFlags "-std=c++17 -fexceptions -frtti"
+            }
+        }
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -27,6 +38,19 @@ android {
         }
     }
 
+    externalNativeBuild {
+        cmake {
+//          arguments "-DPATH_TO_SUPERPOWERED:STRING=${superpowered_sdk_path}", '-DANDROID_TOOLCHAIN=clang', '-DANDROID_ARM_NEON=TRUE', '-DANDROID_STL=gnustl_static'
+            version "3.10.2"
+            path CMAKE_PATH
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDir 'src/main/cpp/opendht'
+        }
+    }
 
     dynamicFeatures = [":sdk"]
 
